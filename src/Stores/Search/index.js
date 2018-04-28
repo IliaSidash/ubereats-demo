@@ -7,6 +7,7 @@ import search from './search.svg';
 const Search = styled.div`
   position: relative;
   padding: 15px 24px;
+  margin-bottom: 24px;
 
   border-bottom: 1px solid #757575;
   opacity: 0.3;
