@@ -27,7 +27,7 @@ const Search = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    margin-bottom: 56px;
+    margin: 32px 0 56px;
   }
 `;
 

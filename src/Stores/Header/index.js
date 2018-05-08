@@ -54,15 +54,15 @@ export default () => (
   <Header>
     <Grid>
       <Row middle="xs">
-        <Col xs={4} sm={2}>
+        <Col xs={4} sm={2} md={3}>
           <Logo />
         </Col>
-        <Col xs={1} sm={6}>
+        <Col xs={1} sm={6} md={5}>
           <HeaderForm>
             <Form />
           </HeaderForm>
         </Col>
-        <Col xs={7} sm={4}>
+        <Col xs={7} sm={4} md={3} mdOffset={1}>
           <Btn>Sign In</Btn>
           <RegBtn>Register</RegBtn>
           <Basket />

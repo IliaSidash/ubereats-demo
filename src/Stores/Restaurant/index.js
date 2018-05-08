@@ -48,7 +48,7 @@ export default props => (
     <Title>Moscow Restaurants</Title>
     <Row>
       {data.map(restaurant => (
-        <Col xs={12} sm={6} key={restaurant.id}>
+        <Col xs={12} sm={6} md={4} key={restaurant.id}>
           <Restaurant>
             <Img src={restaurant.src} alt={restaurant.alt} />
             <Name>{restaurant.name}</Name>
