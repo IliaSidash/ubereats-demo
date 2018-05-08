@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Socials = styled.div`
   display: flex;
   align-items: center;
-  margin: 42px;
+  margin-bottom: 42px;
 `;
 
 const Link = styled.a`

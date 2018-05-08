@@ -33,13 +33,53 @@ const socials = [
   },
 ];
 
+const menuFirst = [
+  {
+    id: 1,
+    href: '#',
+    text: 'About UberEats',
+  },
+  {
+    id: 2,
+    href: '#',
+    text: 'Become a Delivery Partner',
+  },
+  {
+    id: 3,
+    href: '#',
+    text: 'Become a Restaurant Partner',
+  },
+];
+const menuSecond = [
+  {
+    id: 1,
+    href: '#',
+    text: 'See all cities',
+  },
+  {
+    id: 2,
+    href: '#',
+    text: 'Pricing',
+  },
+  {
+    id: 3,
+    href: '#',
+    text: 'Help',
+  },
+  {
+    id: 4,
+    href: '#',
+    text: 'FAQs',
+  },
+];
+
 const Footer = styled.footer`
   padding: 56px 0 4px;
   background: #262626;
 `;
 
 const Hr = styled.hr`
-  margin: 40px 0 8px;
+  margin: 40px 0 32px;
   opacity: 0.4;
   line-height: normal;
 `;
@@ -104,29 +144,35 @@ export default () => (
       <Logo whiteLogo />
       <Hr />
       <Row>
-        <Col xs={7}>
+        <Col xs={7} sm={3}>
           <CustomSelect>
             <Select>
               <option>English</option>
             </Select>
           </CustomSelect>
+          <HashTag>
+            <Sharp>#</Sharp>
+            UberEats
+          </HashTag>
+          <Socials socials={socials} />
+        </Col>
+        <Col sm={3} smOffset={1}>
+          <Menu menu={menuFirst} />
+        </Col>
+        <Col sm={3} smOffset={1}>
+          <Menu menu={menuSecond} />
         </Col>
       </Row>
-      <HashTag>
-        <Sharp>#</Sharp>
-        UberEats
-      </HashTag>
-      <Socials socials={socials} />
-      <Menu />
       <Download />
+
       <Row>
-        <Col xs={12}>
+        <Col xs={12} sm={4}>
           <Link href="./">© 2017 Uber Technologies Inc.</Link>
         </Col>
-        <Col xs={12}>
+        <Col xs={12} sm={4}>
           <Link href="./">Privacy</Link>
         </Col>
-        <Col xs={12}>
+        <Col xs={12} sm={4}>
           <Link href="./">Terms</Link>
         </Col>
       </Row>

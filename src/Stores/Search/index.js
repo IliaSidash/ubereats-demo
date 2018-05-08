@@ -25,6 +25,10 @@ const Search = styled.div`
     background-image: url(${search});
     background-size: 16px 16px;
   }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 56px;
+  }
 `;
 
 const Input = styled.input`

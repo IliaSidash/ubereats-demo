@@ -7,6 +7,10 @@ import location from './location.svg';
 const Form = styled.form`
   display: flex;
   margin-bottom: 40px;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Label = styled.label`
@@ -15,6 +19,17 @@ const Label = styled.label`
   font-size: 11px;
 
   color: #626262;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const LabelText = styled.span`
+  @media screen and (min-width: 768px) {
+    margin-right: 10px;
+  }
 `;
 
 const CustomInput = styled.div`
@@ -68,30 +83,28 @@ const Input = styled.input`
   ::placeholder {
     color: #1d1d1d;
   }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+  }
 `;
 
 export default () => (
-  <Grid>
-    <Row>
-      <Col xs={12}>
-        <Form>
-          <InputGroup>
-            <Label>
-              When
-              <Input defaultValue="asap" />
-            </Label>
-          </InputGroup>
+  <Form>
+    <InputGroup>
+      <Label>
+        <LabelText>When</LabelText>
+        <Input defaultValue="asap" />
+      </Label>
+    </InputGroup>
 
-          <InputGroup>
-            <Label>
-              To
-              <CustomInput>
-                <Input defaultValue="ul. Bolshaya Dmitrovka,22 " />
-              </CustomInput>
-            </Label>
-          </InputGroup>
-        </Form>
-      </Col>
-    </Row>
-  </Grid>
+    <InputGroup>
+      <Label>
+        <LabelText>To</LabelText>
+        <CustomInput>
+          <Input defaultValue="ul. Bolshaya Dmitrovka,22 " />
+        </CustomInput>
+      </Label>
+    </InputGroup>
+  </Form>
 );

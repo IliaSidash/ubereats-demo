@@ -11,7 +11,7 @@ const Download = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-right: none;
   border-left: none;
-  margin: 40px 0;
+  margin: 17px 0 40px;
 `;
 
 const Link = styled.a`
