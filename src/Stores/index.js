@@ -6,12 +6,13 @@ import Form from './Form';
 import Restaurant from './Restaurant';
 import Footer from './Footer/';
 import ArrowUp from '../ui/ArrowUp/';
+import Delivery from './Delivery';
 
 const Stores = () => (
   <div>
     <Header />
     <Search />
-    <Form />
+    <Delivery />
     <Restaurant />
     <Footer />
     <ArrowUp />

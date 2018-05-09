@@ -144,7 +144,7 @@ export default () => (
       <Logo whiteLogo />
       <Hr />
       <Row>
-        <Col xs={7} sm={3}>
+        <Col xs={7} md={3}>
           <CustomSelect>
             <Select>
               <option>English</option>
@@ -156,23 +156,23 @@ export default () => (
           </HashTag>
           <Socials socials={socials} />
         </Col>
-        <Col sm={3} smOffset={1}>
+        <Col md={3} mdOffset={1}>
           <Menu menu={menuFirst} />
         </Col>
-        <Col sm={3} smOffset={1}>
+        <Col md={3} mdOffset={1}>
           <Menu menu={menuSecond} />
         </Col>
       </Row>
       <Download />
 
       <Row>
-        <Col xs={12} sm={4}>
+        <Col xs={12} md={4}>
           <Link href="./">© 2017 Uber Technologies Inc.</Link>
         </Col>
-        <Col xs={12} sm={4}>
+        <Col xs={12} md={4}>
           <Link href="./">Privacy</Link>
         </Col>
-        <Col xs={12} sm={4}>
+        <Col xs={12} md={4}>
           <Link href="./">Terms</Link>
         </Col>
       </Row>

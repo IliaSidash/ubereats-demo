@@ -9,6 +9,11 @@ const Logo = styled.a``;
 const Img = styled.img`
   width: ${props => (props.whiteLogo ? '192px' : '107px')};
   height: ${props => (props.whiteLogo ? '20px' : '11px')};
+
+  @media screen and (min-width: 992px) {
+    width: ${props => (props.whiteLogo ? '192px' : '120px')};
+    height: ${props => (props.whiteLogo ? '20px' : '12px')};
+  }
 `;
 
 export default props => (

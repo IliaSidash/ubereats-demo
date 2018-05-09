@@ -34,6 +34,7 @@ const LabelText = styled.span`
 
 const CustomInput = styled.div`
   position: relative;
+  width: 100%;
 
   :before {
     content: '';
@@ -89,11 +90,11 @@ const Input = styled.input`
   }
 `;
 
-export default () => (
+export default props => (
   <Form>
     <InputGroup>
       <Label>
-        <LabelText>When</LabelText>
+        <LabelText>{props.children}</LabelText>
         <Input defaultValue="asap" />
       </Label>
     </InputGroup>

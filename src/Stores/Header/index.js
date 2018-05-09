@@ -8,7 +8,7 @@ import Logo from '../../ui/Logo/';
 import Btn from '../../ui/Button';
 import Form from './../Form';
 
-const Header = styled.section`
+const Header = styled.header`
   padding: 16px 0;
   box-shadow: 0px 0px 16px rgba(38, 38, 38, 0.16);
   background-color: #fff;
@@ -44,28 +44,35 @@ const Basket = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   margin-left: 27px;
+  display: none;
 
   @media screen and (min-width: 768px) {
     display: inline-block;
   }
 `;
 
+const Toolbar = styled.div`
+  text-align: right;
+`;
+
 export default () => (
   <Header>
     <Grid>
       <Row middle="xs">
-        <Col xs={4} sm={2} md={3}>
+        <Col xs={4} md={2}>
           <Logo />
         </Col>
-        <Col xs={1} sm={6} md={5}>
+        <Col xs={1} md={6}>
           <HeaderForm>
             <Form />
           </HeaderForm>
         </Col>
-        <Col xs={7} sm={4} md={3} mdOffset={1}>
-          <Btn>Sign In</Btn>
-          <RegBtn>Register</RegBtn>
-          <Basket />
+        <Col xs={7} md={4} lg={3} lgOffset={1}>
+          <Toolbar>
+            <Btn>Sign In</Btn>
+            <RegBtn>Register</RegBtn>
+            <Basket />
+          </Toolbar>
         </Col>
       </Row>
     </Grid>
