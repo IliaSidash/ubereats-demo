@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
+import { Link } from 'react-router-dom';
 import data from './data';
 
 const Title = styled.h1`
@@ -43,17 +43,19 @@ const Time = styled.p`
   margin: 0;
 `;
 
-export default props => (
+export default () => (
   <Grid>
     <Title>Moscow Restaurants</Title>
     <Row>
       {data.map(restaurant => (
         <Col xs={12} md={6} lg={4} key={restaurant.id}>
           <Restaurant>
-            <Img src={restaurant.src} alt={restaurant.alt} />
-            <Name>{restaurant.name}</Name>
-            <Desc>{restaurant.desc}</Desc>
-            <Time>{restaurant.time}</Time>
+            <Link href="./" to={`restaurant/${restaurant.id}`}>
+              <Img src={restaurant.src} alt={restaurant.alt} />
+              <Name>{restaurant.name}</Name>
+              <Desc>{restaurant.desc}</Desc>
+              <Time>{restaurant.time}</Time>
+            </Link>
           </Restaurant>
         </Col>
       ))}
