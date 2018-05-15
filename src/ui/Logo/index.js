@@ -17,7 +17,7 @@ const Img = styled.img`
 `;
 
 export default props => (
-  <Logo href="#">
+  <Logo href="/">
     <Img whiteLogo={props.whiteLogo} src={props.whiteLogo ? whiteLogo : logo} alt="ubereats" />
   </Logo>
 );

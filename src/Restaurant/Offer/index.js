@@ -1,25 +1,17 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid, Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
 
-import background from './images/bg-restaurant.jpg';
-import backgroundTablet from './images/bg-restaurant-tablet.jpg';
-import backgroundDesctop from './images/bg-restaurant-desctop.jpg';
-
 const Offer = styled.div`
-  background-image: url(${background});
+  background-image: url(${props =>
+    (props.bgSrc ? `./images/offer/${props.bgSrc}` : 'pushkin.jpg')});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 40px 0;
 
   @media screen and (min-width: 768px) {
-    background-image: url(${backgroundTablet});
     padding: 80px 0;
-  }
-
-  @media screen and (min-width: 992px) {
-    background-image: url(${backgroundDesctop});
   }
 `;
 
@@ -84,15 +76,15 @@ const Wrapper = styled.div`
   }
 `;
 
-export default () => (
-  <Offer>
+export default ({ restaurant }) => (
+  <Offer bgSrc={restaurant.src}>
     <Grid>
       <Col md={7} lg={6} xl={5}>
         <Inner>
-          <Title>Трактир «Пушкин»</Title>
+          <Title>{restaurant.name}</Title>
           <Wrapper>
-            <Desc>₽₽₽ • Европейская</Desc>
-            <Time>40 - 50 Min</Time>
+            <Desc>{restaurant.desc}</Desc>
+            <Time>{restaurant.time}</Time>
           </Wrapper>
         </Inner>
       </Col>

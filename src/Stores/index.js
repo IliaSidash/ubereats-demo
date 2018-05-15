@@ -7,12 +7,12 @@ import Footer from './Footer/';
 import ArrowUp from '../ui/ArrowUp/';
 import Delivery from './Delivery';
 
-const Stores = () => (
+const Stores = ({ restaurants }) => (
   <div>
     <Header />
     <Search />
     <Delivery />
-    <Restaurant />
+    <Restaurant restaurants={restaurants} />
     <Footer />
     <ArrowUp />
   </div>
