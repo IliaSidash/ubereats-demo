@@ -38,14 +38,14 @@ const Title = styled.h2`
   }
 `;
 
-export default ({ menu }) => (
+export default ({ menu, handleOpen }) => (
   <Menu>
     <Grid>
       <Title>Закуски</Title>
       <Row>
         {menu.map(dish => (
           <Col xs={12} lg={6} key={dish.id}>
-            <Dish dish={dish} />
+            <Dish dish={dish} handleOpen={() => handleOpen(dish.id)} />
           </Col>
         ))}
       </Row>

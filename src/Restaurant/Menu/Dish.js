@@ -8,7 +8,9 @@ const Dish = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid rgba(117, 117, 117, 0.2);
   background-color: #fff;
-
+  :hover {
+    cursor: pointer;
+  }
   @media screen and (min-width: 768px) {
     border: 1px solid rgba(117, 117, 117, 0.2);
   }
@@ -84,14 +86,13 @@ const Picture = styled.div`
   }
 `;
 
-export default ({ dish }) => (
-  <Dish>
+export default ({ dish, handleOpen }) => (
+  <Dish onClick={handleOpen}>
     <Text>
       <Title>{dish.title}</Title>
       <Desc>{dish.desc}</Desc>
-      <Price>{dish.price}</Price>
+      <Price>{dish.price} ₽</Price>
     </Text>
-
     <Picture bgSrc={dish.src} />
   </Dish>
 );
