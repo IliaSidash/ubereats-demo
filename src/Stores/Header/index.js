@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import basket from './basket.svg';
-
 import Logo from '../../ui/Logo/';
 import Btn from '../../ui/Button';
 import Form from './../Form';
+
+import Cart from './Cart';
 
 const Header = styled.header`
   padding: 16px 0;
@@ -34,28 +34,11 @@ const HeaderForm = styled.div`
   }
 `;
 
-const Basket = styled.div`
-  position: relative;
-  top: 9px;
-  display: inline-block;
-  height: 22px;
-  width: 23px;
-  background-image: url(${basket});
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-left: 27px;
-  display: none;
-
-  @media screen and (min-width: 768px) {
-    display: inline-block;
-  }
-`;
-
 const Toolbar = styled.div`
   text-align: right;
 `;
 
-export default () => (
+export default ({ productsInCart }) => (
   <Header>
     <Grid>
       <Row middle="xs">
@@ -71,7 +54,7 @@ export default () => (
           <Toolbar>
             <Btn>Sign In</Btn>
             <RegBtn>Register</RegBtn>
-            <Basket />
+            <Cart productsInCart={productsInCart} />
           </Toolbar>
         </Col>
       </Row>
