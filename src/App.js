@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { findIndex } from 'lodash/fp';
 
 import Stores from './Stores/';
 import Restaurant from './Restaurant/';
@@ -9,11 +10,21 @@ import restaurants from './api/restaurants';
 
 class App extends Component {
   state = {
-    productsInCart: [],
+    productsInCart: [2, 2, 3, 4],
+    restaurantId: 1,
   };
 
   addToCart = (dishId, id) => {
-    console.log(dishId, id);
+    const { productsInCart, restaurantId } = this.state;
+
+    if (restaurantId === id || restaurantId === null) {
+      this.setState({
+        restaurantId: id,
+        productsInCart: [...productsInCart, dishId],
+      });
+    } else {
+      console.log('Change restaurant');
+    }
   };
 
   render() {
@@ -41,7 +52,16 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/checkout" component={Cart} />
+          <Route
+            path="/checkout"
+            render={props => (
+              <Cart
+                productsInCart={this.state.productsInCart}
+                restaurantId={this.state.restaurantId}
+                {...props}
+              />
+            )}
+          />
         </div>
       </Router>
     );

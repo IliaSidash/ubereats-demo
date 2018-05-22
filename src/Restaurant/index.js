@@ -55,7 +55,7 @@ class Stores extends React.Component {
   };
 
   render() {
-    const { productsInCart, addToCart } = this.props;
+    const { productsInCart } = this.props;
     const { restaurant, modalIsOpen, currentId } = this.state;
 
     return (
