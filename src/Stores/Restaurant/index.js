@@ -54,20 +54,43 @@ const Time = styled.p`
   margin: 0;
 `;
 
+const ImgNotFound = styled.img`
+  display: block;
+  margin: 0 auto;
+`;
+
+const TextNotFound = styled.p`
+  text-align: center;
+`;
+
+const getRestaurant = restaurant => (
+  <Col xs={12} md={6} lg={4} key={restaurant.id}>
+    <Restaurant href="./" to={`restaurant/${restaurant.id}`}>
+      <Img src={`./images/${restaurant.src}`} alt={restaurant.alt} />
+      <Name>{restaurant.name}</Name>
+      <Desc>{restaurant.desc}</Desc>
+      <Time>{restaurant.time}</Time>
+    </Restaurant>
+  </Col>
+);
+
+const getNotFound = () => (
+  <Col xs={12}>
+    <ImgNotFound
+      src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats/static/images/components/not-found/fail-cookie-55da6a7e40.gif"
+      alt="cookie"
+    />
+    <TextNotFound>По запросу ничего не найдено</TextNotFound>
+  </Col>
+);
+
 export default ({ restaurants }) => (
   <Grid>
     <Title>Moscow Restaurants</Title>
     <Row>
-      {restaurants.map(restaurant => (
-        <Col xs={12} md={6} lg={4} key={restaurant.id}>
-          <Restaurant href="./" to={`restaurant/${restaurant.id}`}>
-            <Img src={`./images/${restaurant.src}`} alt={restaurant.alt} />
-            <Name>{restaurant.name}</Name>
-            <Desc>{restaurant.desc}</Desc>
-            <Time>{restaurant.time}</Time>
-          </Restaurant>
-        </Col>
-      ))}
+      {restaurants.length > 0
+        ? restaurants.map(restaurant => getRestaurant(restaurant))
+        : getNotFound()}
     </Row>
   </Grid>
 );

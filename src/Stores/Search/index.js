@@ -34,22 +34,21 @@ const Search = styled.div`
 const Input = styled.input`
   font-weight: normal;
   line-height: 24px;
-  font-size: 13px;
+  font-size: 16px;
   width: 100%;
 
-  color: #626262;
+  color: #262626;
   mix-blend-mode: normal;
-  opacity: 0.5;
   background-color: transparent;
   border: none;
 `;
 
-export default () => (
+export default ({ searchValue, handleInput }) => (
   <Grid>
     <Row>
       <Col xs={12}>
         <Search>
-          <Input placeholder="Search for restaurant or cuisine" />
+          <Input value={searchValue} onChange={handleInput} placeholder="Искать ресторан" />
         </Search>
       </Col>
     </Row>
