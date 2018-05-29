@@ -47,26 +47,23 @@ class Stores extends React.Component {
     this.setState({ modalIsOpen: false });
   };
 
-  getContent = (dishId) => {
-    const { id } = this.props.match.params;
+  getContent = (restaurantID, dishId) => {
     const { menu } = this.state.restaurant;
     const dish = menu.find(dish => dish.id === dishId);
-    return <ModalContent dish={dish} addToCart={dishId => this.props.addToCart(dishId, id)} />;
+    return <ModalContent restaurantID={restaurantID} dish={dish} />;
   };
 
   render() {
-    const { productsInCart } = this.props;
     const { restaurant, modalIsOpen, currentId } = this.state;
-
     return (
       <div>
-        <Header productsInCart={productsInCart} />
+        <Header />
         <Offer restaurant={restaurant} />
         <Menu menu={restaurant.menu} handleOpen={this.onOpenModal} />
         <Footer />
         <ArrowUp />
         <Modal open={modalIsOpen} onClose={this.onCloseModal} center styles={styles}>
-          {currentId ? this.getContent(currentId) : null}
+          {currentId ? this.getContent(restaurant.id, currentId) : null}
         </Modal>
       </div>
     );

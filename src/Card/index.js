@@ -1,0 +1,70 @@
+import React from 'react';
+import { Grid } from 'react-flexbox-grid';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import Header from './Header';
+
+const Title = styled.h1`
+  padding: 32px 0;
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 200;
+  margin: 0;
+`;
+
+const Order = styled.div`
+  color: #757575;
+  font-size: 14px;
+  line-height: 22px;
+`;
+
+const Restaurant = styled.h2`
+  font-size: 22px;
+  line-height: 34px;
+  margin: 0 0 15px;
+  color: #262626;
+  font-weight: 200;
+`;
+const getContent = (products, restaurantID, restaurants) => {
+  if (products.length > 0) {
+    const restaurant = restaurants.find(rest => rest.id === restaurantID);
+    const dishes = restaurant.menu.filter(dish => products.includes(dish.id));
+    return (
+      <div>
+        <Title>Оформление заказа</Title>
+        <Order>Ваш заказ из ресторана</Order>
+        <Restaurant>{restaurant.name}</Restaurant>
+        {dishes.map(dish => (
+          <p key={dish.id}>
+            {dish.title} <span>{dish.price}</span>
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return (
+    <Grid>
+      <h2>Ваша корзина пустая</h2>
+    </Grid>
+  );
+};
+
+class Basket extends React.Component {
+  state = {};
+  render() {
+    const { productsInCard, restaurantID, restaurants } = this.props;
+    return (
+      <div>
+        <Header />
+        <Grid>{getContent(productsInCard, restaurantID, restaurants)}</Grid>
+      </div>
+    );
+  }
+}
+
+export default connect(({ card, restaurants }) => ({
+  productsInCard: card.productsInCard,
+  restaurantID: card.restaurantID,
+  restaurants,
+}))(Basket);

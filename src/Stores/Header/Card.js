@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Cart = styled(Link)`
   position: relative;
@@ -38,7 +39,7 @@ const getCount = (products) => {
   return null;
 };
 
-export default ({ productsInCart }) => (
+export const CardComponent = ({ productsInCard, restaurantID }) => (
   <Cart to="/checkout">
     <Svg
       width="19"
@@ -64,6 +65,11 @@ export default ({ productsInCart }) => (
         </g>
       </g>
     </Svg>
-    {getCount(productsInCart)}
+    {getCount(productsInCard)}
   </Cart>
 );
+
+export default connect(({ card }) => ({
+  productsInCard: card.productsInCard,
+  restaurantID: card.restaurantID,
+}))(CardComponent);

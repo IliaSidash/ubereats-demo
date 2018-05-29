@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { addToCard } from '../../AC/';
 
 const Picture = styled.div`
   width: 290px;
@@ -56,15 +58,26 @@ const Price = styled.span`
   margin-left: auto;
 `;
 
-export default ({ dish, addToCart }) => (
-  <div>
-    <Picture bgSrc={dish.src} />
-    <Text>
-      <Title>{dish.title}</Title>
-      <Desc>{dish.desc}</Desc>
-    </Text>
-    <Button onClick={() => addToCart(dish.id)}>
-      Добавить в корзину <Price>{dish.price} ₽</Price>
-    </Button>
-  </div>
-);
+class Modal extends React.Component {
+  handleAdd = () => {
+    const { addToCard, restaurantID, dish } = this.props;
+    addToCard(restaurantID, dish.id);
+  };
+  render() {
+    const { dish } = this.props;
+    return (
+      <div>
+        <Picture bgSrc={dish.src} />
+        <Text>
+          <Title>{dish.title}</Title>
+          <Desc>{dish.desc}</Desc>
+        </Text>
+        <Button onClick={this.handleAdd}>
+          Добавить в корзину <Price>{dish.price} ₽</Price>
+        </Button>
+      </div>
+    );
+  }
+}
+
+export default connect(null, { addToCard })(Modal);

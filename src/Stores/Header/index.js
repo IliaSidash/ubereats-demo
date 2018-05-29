@@ -6,7 +6,7 @@ import Logo from '../../ui/Logo/';
 import Btn from '../../ui/Button';
 import Form from './../Form';
 
-import Cart from './Cart';
+import Card from './Card';
 
 const Header = styled.header`
   padding: 16px 0;
@@ -38,7 +38,7 @@ const Toolbar = styled.div`
   text-align: right;
 `;
 
-export default ({ productsInCart }) => (
+export default ({ productsInCard }) => (
   <Header>
     <Grid>
       <Row middle="xs">
@@ -54,7 +54,7 @@ export default ({ productsInCart }) => (
           <Toolbar>
             <Btn>Sign In</Btn>
             <RegBtn>Register</RegBtn>
-            <Cart productsInCart={productsInCart} />
+            <Card productsInCart={productsInCard} />
           </Toolbar>
         </Col>
       </Row>
