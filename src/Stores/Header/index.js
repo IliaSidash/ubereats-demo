@@ -54,7 +54,7 @@ export default ({ productsInCard }) => (
           <Toolbar>
             <Btn>Sign In</Btn>
             <RegBtn>Register</RegBtn>
-            <Card productsInCart={productsInCard} />
+            <Card productsInCard={productsInCard} />
           </Toolbar>
         </Col>
       </Row>
