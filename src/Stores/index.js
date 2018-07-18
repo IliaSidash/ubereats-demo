@@ -33,7 +33,8 @@ class Stores extends React.Component {
         <Header productsInCard={productsInCard} />
         <Search searchValue={searchValue} handleInput={this.handleInput} />
         <Delivery />
-        <Restaurant restaurants={this.getRestaurants(searchValue)} />
+        {/* <Restaurant restaurants={this.getRestaurants(searchValue)} /> */}
+        <Restaurant />
         <Footer />
         <ArrowUp />
       </div>

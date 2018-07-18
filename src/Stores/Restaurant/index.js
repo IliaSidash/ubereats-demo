@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Title = styled.h1`
   font-weight: normal;
@@ -63,16 +64,9 @@ const TextNotFound = styled.p`
   text-align: center;
 `;
 
-const getRestaurant = restaurant => (
-  <Col xs={12} md={6} lg={4} key={restaurant.id}>
-    <Restaurant href="./" to={`restaurant/${restaurant.id}`}>
-      <Img src={`./images/${restaurant.src}`} alt={restaurant.alt} />
-      <Name>{restaurant.name}</Name>
-      <Desc>{restaurant.desc}</Desc>
-      <Time>{restaurant.time}</Time>
-    </Restaurant>
-  </Col>
-);
+// const getRestaurant = restaurant => (
+
+// );
 
 const getNotFound = () => (
   <Col xs={12}>
@@ -84,13 +78,28 @@ const getNotFound = () => (
   </Col>
 );
 
-export default ({ restaurants }) => (
-  <Grid>
-    <Title>Moscow Restaurants</Title>
-    <Row>
-      {restaurants.length > 0
-        ? restaurants.map(restaurant => getRestaurant(restaurant))
-        : getNotFound()}
-    </Row>
-  </Grid>
-);
+const RestaurantComponent = ({ restaurants }) => {
+  const { restaurantIDs, restaurantsInit } = restaurants;
+
+  return (
+    <Grid>
+      <Title>Moscow Restaurants</Title>
+      <Row>
+        {restaurantIDs.map(id => (
+          <Col xs={12} md={6} lg={4} key={id}>
+            <Restaurant href="./" to={`restaurant/${id}`}>
+              <Img src={`./images/${restaurantsInit[id].src}`} alt="alt" />
+              <Name>{restaurantsInit[id].name}</Name>
+              <Desc>{restaurantsInit[id].desc}</Desc>
+              <Time>{restaurantsInit[id].time}</Time>
+            </Restaurant>
+          </Col>
+        ))}
+      </Row>
+    </Grid>
+  );
+};
+
+export default connect(({ restaurants }) => ({
+  restaurants,
+}))(RestaurantComponent);
