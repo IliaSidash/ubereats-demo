@@ -61,7 +61,7 @@ const Price = styled.span`
 class Modal extends React.Component {
   handleAdd = () => {
     const { addToCard, restaurantID, dish } = this.props;
-    addToCard(restaurantID, dish.id);
+    addToCard(restaurantID, dish);
   };
   render() {
     const { dish } = this.props;
@@ -80,4 +80,7 @@ class Modal extends React.Component {
   }
 }
 
-export default connect(null, { addToCard })(Modal);
+export default connect(
+  null,
+  { addToCard },
+)(Modal);
