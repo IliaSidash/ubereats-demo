@@ -26,9 +26,29 @@ const Restaurant = styled.h2`
   color: #262626;
   font-weight: 200;
 `;
+
 const getContent = (products, restaurantID, restaurants) => {
+  const { menu } = restaurants[restaurantID];
+  console.log(products);
+
+  console.log(products.findIndex(elem => elem.id === 3));
+
+  const groupedProducts = products.reduce((acc, cur) => {
+    if (acc.findIndex(elem => elem.id === cur.id) === -1) {
+      cur.count = 1;
+      acc.push(cur);
+      console.log(cur);
+    } else {
+      cur.count += 1;
+      console.log(cur);
+    }
+    return acc;
+  }, []);
+
+  console.log(groupedProducts);
+
   if (products.length > 0) {
-    const restaurant = restaurants.find(rest => rest.id === restaurantID);
+    const restaurant = restaurants[restaurantID];
     const dishes = restaurant.menu.filter(dish => products.includes(dish.id));
     return (
       <div>
@@ -52,6 +72,7 @@ const getContent = (products, restaurantID, restaurants) => {
 
 class Basket extends React.Component {
   state = {};
+
   render() {
     const { productsInCard, restaurantID, restaurants } = this.props;
     return (
@@ -66,5 +87,5 @@ class Basket extends React.Component {
 export default connect(({ card, restaurants }) => ({
   productsInCard: card.productsInCard,
   restaurantID: card.restaurantID,
-  restaurants,
+  restaurants: restaurants.restaurantsInit,
 }))(Basket);
