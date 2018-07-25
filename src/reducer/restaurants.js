@@ -7,7 +7,10 @@ const restaurantsDefault = {
 
 export default (restaurants = restaurantsDefault) => ({
   ...restaurants,
-  restaurantIDs: [1, 2, 3, 4, 5, 6],
+  restaurantIDs: data.reduce((acc, cur) => {
+    acc.push(cur.id);
+    return acc;
+  }, []),
   restaurantsInit: data.reduce((acc, cur) => {
     acc[cur.id] = cur;
     return acc;
