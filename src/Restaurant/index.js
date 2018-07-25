@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
+import { connect } from 'react-redux';
 
 import Header from '../Stores/Header/';
 import Footer from '../Stores/Footer/';
@@ -7,8 +8,6 @@ import ArrowUp from '../ui/ArrowUp/';
 import Offer from './Offer';
 import Menu from './Menu';
 import ModalContent from './Menu/Modal';
-
-import restaurants from '../api/restaurants';
 
 const styles = {
   modal: {
@@ -26,18 +25,9 @@ const styles = {
 
 class Stores extends React.Component {
   state = {
-    restaurant: {},
     modalIsOpen: false,
     currentId: null,
   };
-
-  componentWillMount() {
-    const { id } = this.props.match.params;
-
-    this.setState({
-      restaurant: restaurants.find(restaurant => restaurant.id === parseInt(id, 10)),
-    });
-  }
 
   onOpenModal = (id) => {
     this.setState({ modalIsOpen: true, currentId: id });
@@ -47,26 +37,35 @@ class Stores extends React.Component {
     this.setState({ modalIsOpen: false });
   };
 
-  getContent = (restaurantID, dishId) => {
-    const { menu } = this.state.restaurant;
-    const dish = menu.find(dish => dish.id === dishId);
-    return <ModalContent restaurantID={restaurantID} dish={dish} />;
+  getContent = (dishId) => {
+    const { id } = this.props.match.params;
+    const { restaurantsInit } = this.props;
+    const { menu } = restaurantsInit[id];
+    const dish = menu.find(dishFromMenu => dishFromMenu.id === dishId);
+
+    return <ModalContent restaurantID={id} dish={dish} />;
   };
 
   render() {
-    const { restaurant, modalIsOpen, currentId } = this.state;
+    const { modalIsOpen, currentId } = this.state;
+    const { id } = this.props.match.params;
+    const { restaurantsInit } = this.props;
+
+    const restaurant = restaurantsInit[id];
+    const { menu } = restaurant;
+
     return (
       <div>
         <Header />
         <Offer restaurant={restaurant} />
-        <Menu menu={restaurant.menu} handleOpen={this.onOpenModal} />
+        <Menu menu={menu} handleOpen={this.onOpenModal} />
         <Footer />
         <ArrowUp />
         <Modal open={modalIsOpen} onClose={this.onCloseModal} center styles={styles}>
-          {currentId ? this.getContent(restaurant.id, currentId) : null}
+          {currentId ? this.getContent(currentId) : null}
         </Modal>
       </div>
     );
   }
 }
-export default Stores;
+export default connect(({ restaurants }) => restaurants)(Stores);
