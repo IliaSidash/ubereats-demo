@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import Header from './Header';
+import getRestaurantbyID from '../AC/';
 
 const Title = styled.h1`
   padding: 32px 0;
@@ -27,65 +28,88 @@ const Restaurant = styled.h2`
   font-weight: 200;
 `;
 
-const getContent = (products, restaurantID, restaurants) => {
-  const { menu } = restaurants[restaurantID];
-  console.log(products);
+const getContent = (props) => {
+  const {
+    restaurantsInit, dishes, productsInCard, restaurantID,
+  } = props;
 
-  console.log(products.findIndex(elem => elem.id === 3));
-
-  const groupedProducts = products.reduce((acc, cur) => {
-    if (acc.findIndex(elem => elem.id === cur.id) === -1) {
-      cur.count = 1;
-      acc.push(cur);
-      console.log(cur);
-    } else {
-      cur.count += 1;
-      console.log(cur);
+  const uniqueDishesID = productsInCard.reduce((acc, cur) => {
+    if (acc.indexOf(cur) === -1) {
+      return [...acc, cur];
     }
     return acc;
   }, []);
 
+  const groupedProducts = productsInCard.reduce((acc, cur) => {
+    if (cur in acc) {
+      console.log({ ...acc, ...acc[cur], count: acc[cur].count + 1 });
+      return { ...acc, ...acc[cur], count: acc[cur].count + 1 };
+    }
+    console.log({ ...acc, ...dishes[cur], count: 1 });
+    return { ...acc, ...dishes[cur], count: 1 };
+  }, {});
+
   console.log(groupedProducts);
 
-  if (products.length > 0) {
-    const restaurant = restaurants[restaurantID];
-    const dishes = restaurant.menu.filter(dish => products.includes(dish.id));
-    return (
-      <div>
-        <Title>Оформление заказа</Title>
-        <Order>Ваш заказ из ресторана</Order>
-        <Restaurant>{restaurant.name}</Restaurant>
-        {dishes.map(dish => (
-          <p key={dish.id}>
-            {dish.title} <span>{dish.price}</span>
-          </p>
-        ))}
-      </div>
-    );
-  }
   return (
+    // const groupedProducts = products.reduce((acc, cur) => {
+    //   if (acc.findIndex(elem => elem.id === cur.id) === -1) {
+    //     cur.count = 1;
+    //     acc.push(cur);
+    //     console.log(cur);
+    //   } else {
+    //     cur.count += 1;
+    //     console.log(cur);
+    //   }
+    //   return acc;
+    // }, []);
+
+    // console.log(groupedProducts);
+
+    // if (products.length > 0) {
+    //   const restaurant = restaurants[restaurantID];
+    //   const dishes = restaurant.menu.filter(dish => products.includes(dish.id));
+    //   return (
+    //     <div>
+    //       <Title>Оформление заказа</Title>
+    //       <Order>Ваш заказ из ресторана</Order>
+    //       <Restaurant>{restaurant.name}</Restaurant>
+    //       {dishes.map(dish => (
+    //         <p key={dish.id}>
+    //           {dish.title} <span>{dish.price}</span>
+    //         </p>
+    //       ))}
+    //     </div>
+    //   );
+    // }
     <Grid>
       <h2>Ваша корзина пустая</h2>
     </Grid>
   );
 };
-
 class Basket extends React.Component {
   state = {};
 
   render() {
-    const { productsInCard, restaurantID, restaurants } = this.props;
     return (
       <div>
         <Header />
-        <Grid>{getContent(productsInCard, restaurantID, restaurants)}</Grid>
+        <Grid>{getContent(this.props)}</Grid>
       </div>
     );
   }
 }
 
-export default connect(({ card, restaurants }) => ({
+const mapStateToProps = ({ restaurants, card }) => ({
+  restaurantsInit: restaurants.restaurantsInit,
+  dishes: restaurants.dishes,
   productsInCard: card.productsInCard,
   restaurantID: card.restaurantID,
-  restaurants: restaurants.restaurantsInit,
-}))(Basket);
+});
+
+const mapDispatchProps = { getRestaurantbyID };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchProps,
+)(Basket);

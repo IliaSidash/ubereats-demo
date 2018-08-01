@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-class Stores extends React.Component {
+class Restaurant extends React.Component {
   state = {
     modalIsOpen: false,
     currentId: null,
@@ -37,35 +37,26 @@ class Stores extends React.Component {
     this.setState({ modalIsOpen: false });
   };
 
-  getContent = (dishId) => {
-    const { id } = this.props.match.params;
-    const { restaurantsInit } = this.props;
-    const { menu } = restaurantsInit[id];
-    const dish = menu.find(dishFromMenu => dishFromMenu.id === dishId);
-
-    return <ModalContent restaurantID={id} dish={dish} />;
-  };
-
   render() {
     const { modalIsOpen, currentId } = this.state;
     const { id } = this.props.match.params;
-    const { restaurantsInit } = this.props;
-
+    const { restaurantsInit, dishes } = this.props;
     const restaurant = restaurantsInit[id];
+
     const { menu } = restaurant;
 
     return (
       <div>
         <Header />
         <Offer restaurant={restaurant} />
-        <Menu menu={menu} handleOpen={this.onOpenModal} />
+        <Menu menu={menu} dishes={dishes} handleOpen={this.onOpenModal} />
         <Footer />
         <ArrowUp />
         <Modal open={modalIsOpen} onClose={this.onCloseModal} center styles={styles}>
-          {currentId ? this.getContent(currentId) : null}
+          {currentId ? <ModalContent restaurantID={id} dishId={currentId} /> : null}
         </Modal>
       </div>
     );
   }
 }
-export default connect(({ restaurants }) => restaurants)(Stores);
+export default connect(({ restaurants }) => restaurants)(Restaurant);

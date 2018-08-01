@@ -79,13 +79,13 @@ const getNotFound = () => (
 );
 
 const RestaurantComponent = ({ restaurants }) => {
-  const { restaurantIDs, restaurantsInit } = restaurants;
+  const { restaurantsInit, restaurantsList } = restaurants;
 
   return (
     <Grid>
       <Title>Moscow Restaurants</Title>
       <Row>
-        {restaurantIDs.map(id => (
+        {restaurantsList.map(id => (
           <Col xs={12} md={6} lg={4} key={id}>
             <Restaurant href="./" to={`restaurant/${id}`}>
               <Img src={`./images/${restaurantsInit[id].src}`} alt="alt" />

@@ -6,7 +6,7 @@ import Logo from '../../ui/Logo/';
 import Btn from '../../ui/Button';
 import Form from './../Form';
 
-import Card from './Card';
+// import Card from './Card';
 
 const Header = styled.header`
   padding: 16px 0;
@@ -54,7 +54,7 @@ export default ({ productsInCard }) => (
           <Toolbar>
             <Btn>Sign In</Btn>
             <RegBtn>Register</RegBtn>
-            <Card productsInCard={productsInCard} />
+            {/* <Card productsInCard={productsInCard} /> */}
           </Toolbar>
         </Col>
       </Row>

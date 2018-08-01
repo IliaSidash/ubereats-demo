@@ -60,27 +60,35 @@ const Price = styled.span`
 
 class Modal extends React.Component {
   handleAdd = () => {
-    const { addToCard, restaurantID, dish } = this.props;
-    addToCard(restaurantID, dish);
+    const { addToCard, restaurantID, dishId } = this.props;
+    
+    addToCard(restaurantID, dishId);
   };
+
   render() {
-    const { dish } = this.props;
+    const { dishId, dishes } = this.props;
     return (
       <div>
-        <Picture bgSrc={dish.src} />
+        <Picture bgSrc={dishes[dishId].src} />
         <Text>
-          <Title>{dish.title}</Title>
-          <Desc>{dish.desc}</Desc>
+          <Title>{dishes[dishId].title}</Title>
+          <Desc>{dishes[dishId].desc}</Desc>
         </Text>
         <Button onClick={this.handleAdd}>
-          Добавить в корзину <Price>{dish.price} ₽</Price>
+          Добавить в корзину <Price>{dishes[dishId].price} ₽</Price>
         </Button>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ restaurants }) => ({
+  dishes: restaurants.dishes,
+});
+
+const mapDispatchToProps = () => ({ addToCard });
+
 export default connect(
-  null,
-  { addToCard },
+  mapStateToProps,
+  mapDispatchToProps,
 )(Modal);

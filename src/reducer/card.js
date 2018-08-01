@@ -1,25 +1,8 @@
 import { ADD_TO_CARD } from '../constants/';
 
 const cardDefault = {
-  productsInCard: [
-    {
-      id: 1,
-      title: 'Куриные крылышки ',
-      desc: 'Хрустящие куриные крылышки. Еще аппетитнее с соусом Барбекю!',
-      price: '550 ',
-      src: 'macdonalds/dish-1.jpg',
-      alt: 'alt_text',
-    },
-    {
-      id: 1,
-      title: 'Куриные крылышки ',
-      desc: 'Хрустящие куриные крылышки. Еще аппетитнее с соусом Барбекю!',
-      price: '550 ',
-      src: 'macdonalds/dish-1.jpg',
-      alt: 'alt_text',
-    },
-  ],
-  restaurantID: 1,
+  productsInCard: [1, 1, 2],
+  restaurantID: 'res1',
 };
 
 export default (card = cardDefault, action) => {

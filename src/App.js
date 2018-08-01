@@ -6,29 +6,13 @@ import Stores from './Stores/';
 import Restaurant from './Restaurant/';
 import Card from './Card/';
 
-import restaurants from './api/restaurants';
-
 class App extends Component {
-  state = {
-    productsInCard: [],
-  };
-
   render() {
     return (
       <Provider store={store}>
         <Router>
           <div>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <Stores
-                  restaurants={restaurants}
-                  productsInCard={this.state.productsInCard}
-                  {...props}
-                />
-              )}
-            />
+            <Route exact path="/" component={Stores} />
             <Route path="/restaurant/:id" component={Restaurant} />
             <Route path="/checkout" component={Card} />
           </div>

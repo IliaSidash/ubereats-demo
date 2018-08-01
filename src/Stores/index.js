@@ -26,12 +26,12 @@ class Stores extends React.Component {
   };
 
   render() {
-    const { productsInCard } = this.props;
-    const { searchValue } = this.state;
+    // const { productsInCard } = this.props;
+    // const { searchValue } = this.state;
     return (
       <div>
-        <Header productsInCard={productsInCard} />
-        <Search searchValue={searchValue} handleInput={this.handleInput} />
+        <Header /* productsInCard={productsInCard} 8 */ />
+        <Search /* searchValue={searchValue} handleInput={this.handleInput} */ />
         <Delivery />
         {/* <Restaurant restaurants={this.getRestaurants(searchValue)} /> */}
         <Restaurant />
